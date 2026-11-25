@@ -1,0 +1,21 @@
+{
+  "info": { "name": "Component Inventory API", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "id", "value": "PASTE_ID_HERE" }
+  ],
+  "item": [
+    { "name": "Health check", "request": { "method": "GET", "url": "{{baseUrl}}/api/health" } },
+    { "name": "Create component", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/components",
+      "body": { "mode": "raw", "raw": "{\n  \"componentName\": \"ATmega328P\",\n  \"category\": \"Microcontroller\",\n  \"partNumber\": \"ATMEGA328P-PU\",\n  \"manufacturer\": \"Microchip\",\n  \"quantity\": 50,\n  \"unitPrice\": 250,\n  \"supplierEmail\": \"sales@example.com\"\n}" } } },
+    { "name": "Get all components", "request": { "method": "GET", "url": "{{baseUrl}}/api/components" } },
+    { "name": "Get component by ID", "request": { "method": "GET", "url": "{{baseUrl}}/api/components/{{id}}" } },
+    { "name": "Update component", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/components/{{id}}",
+      "body": { "mode": "raw", "raw": "{\n  \"quantity\": 5,\n  \"status\": \"Low Stock\"\n}" } } },
+    { "name": "Delete component", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/components/{{id}}" } },
+    { "name": "Test: missing required field", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "url": "{{baseUrl}}/api/components",
+      "body": { "mode": "raw", "raw": "{\n  \"componentName\": \"LM358\",\n  \"category\": \"IC\",\n  \"partNumber\": \"LM358N\",\n  \"manufacturer\": \"TI\",\n  \"quantity\": 20,\n  \"unitPrice\": 15\n}" } } },
+    { "name": "Test: invalid ID", "request": { "method": "GET", "url": "{{baseUrl}}/api/components/12345" } },
+    { "name": "Test: valid ID, not found", "request": { "method": "GET", "url": "{{baseUrl}}/api/components/507f1f77bcf86cd799439011" } }
+  ]
+}
